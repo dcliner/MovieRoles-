@@ -7,17 +7,18 @@
 
 import SwiftUI
 
+
+
 struct ContentView: View {
-    @StateObject private var viewModel = WebHandler()
-    @State private var searchText = ""
+    @StateObject private var webhandler = WebHandler()
+    @StateObject private var viewModel = MovieViewModel()
+   // @State private var searchText = ""
     var body: some View {
             NavigationView{
-                List (viewModel.movieList ?? [], id: \.movieid){  movieData in
+                List (viewModel.movieResults , id: \.movieid){  movieData in
                         NavigationLink {
                             SingleMovieView(object: movieData)
-                        } label: {
-                            HStack {
-                                AsyncImage(url: URL(string: movieData.images?.imageURL ?? "No image")){
+                        } label: { HStack { AsyncImage(url: URL(string: movieData.images?.imageURL ?? "No image")){
                                             phase in
                                             switch phase{
                                             case.success(let image):
@@ -41,12 +42,12 @@ struct ContentView: View {
                     
                 }
             .listStyle(.plain)
-            .searchable(text: $searchText)
-            .onChange(of: searchText) { value in
-                    if !value.isEmpty{
-                        viewModel.getVideoData(searchTerm: value)
-                    }
-            }
+            .searchable(text: $viewModel.searchText)
+//            .onChange(of: viewModel.searchText) { value in
+//                    if !value.isEmpty{
+//                        webhandler.getVideoData(searchTerm: value)
+//                    }
+//            }
             
             
         }

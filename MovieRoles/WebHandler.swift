@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 
+
 class WebHandler:ObservableObject {
     @Published var movieList: [D]?
       
@@ -31,7 +32,9 @@ class WebHandler:ObservableObject {
                 let movieData = try JSONDecoder().decode(MovieDetails.self, from: moviedata)
                 DispatchQueue.main.async {
                     self.movieList = movieData.movies
-                } 
+                    
+                }
+                 
                 //print(String(data: movieData, encoding: .utf8)!)
             }catch{
                 print (error)
@@ -39,7 +42,7 @@ class WebHandler:ObservableObject {
         }
         
         task.resume()
-        
+    
     }
     
     
