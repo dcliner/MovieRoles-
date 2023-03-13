@@ -11,10 +11,10 @@ struct SingleMovieView: View {
     let object:D
     var body: some View {
         VStack{
-            Text("\(object.l)").font(.largeTitle).fontWeight(.heavy)
-            
+            Text("\(object.movietitle ?? "No title given")").font(.largeTitle).fontWeight(.heavy)
+        
             VStack{
-                AsyncImage(url: URL(string: object.i?.imageURL ?? "No image")){
+                AsyncImage(url: URL(string: object.images?.imageURL ?? "No image")){
                     phase in
                     switch phase{
                     case.success(let image):
@@ -30,21 +30,21 @@ struct SingleMovieView: View {
                     .padding()
                 VStack{
                     HStack{
-                        Text("Title: \(object.l)")
+                        Text("Title: \(object.movietitle ?? "No title given")")
                             
                     }
                     HStack{
-                        Text("Actors: \(object.s)")
+                        Text("Actors: \(object.actors ?? "No actors listed")")
                             .fontWeight(.bold)
                     }
                     HStack{
-                        Text("Rank: \(object.rank ?? 0)")
+                        Text("Rank: \(object.movierank ?? 0)")
                             
-                        Text("Year: \(object.yr ?? "No year given")")
+                        Text("Year: \(object.movieyear ?? 0)")
                             
                     }
                     HStack{
-                        Text("Type: \(object.qid ?? "No feature")")
+                        Text("Type: \(object.featureid ?? "No feature")")
                         
                     }
                     

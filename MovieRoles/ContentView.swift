@@ -12,12 +12,12 @@ struct ContentView: View {
     @State private var searchText = ""
     var body: some View {
             NavigationView{
-                List (viewModel.movieList ?? [], id: \.id){  movieData in
+                List (viewModel.movieList ?? [], id: \.movieid){  movieData in
                         NavigationLink {
                             SingleMovieView(object: movieData)
                         } label: {
                             HStack {
-                                AsyncImage(url: URL(string: movieData.i?.imageURL ?? "No image")){
+                                AsyncImage(url: URL(string: movieData.images?.imageURL ?? "No image")){
                                             phase in
                                             switch phase{
                                             case.success(let image):
@@ -33,7 +33,7 @@ struct ContentView: View {
                                                 ProgressView()
                                             }
                                         }
-                                Text(movieData.l )
+                                Text(movieData.movietitle ?? "No title given" )
                                     }
                         }
                         
@@ -43,7 +43,7 @@ struct ContentView: View {
             .listStyle(.plain)
             .searchable(text: $searchText)
             .onChange(of: searchText) { value in
-                    if !value.isEmpty && value.count > 3{
+                    if !value.isEmpty{
                         viewModel.getVideoData(searchTerm: value)
                     }
             }

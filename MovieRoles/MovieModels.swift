@@ -7,19 +7,42 @@
 
 import Foundation
 struct MovieDetails: Codable {
-    let d: [D]
-    let q: String
-    let v: Int
+    let movies : [D]
+    let query: String
+    let response: Int
+    
+    enum CodingKeys: String, CodingKey{
+        case movies = "d"
+        case query = "q"
+        case response = "v"
+    }
+    
 }
 
 // MARK: - D
-struct D: Codable, Identifiable {
-    //var movieid = UUID()
-    let i: I?
-    let id, l, s: String
-    let q, qid: String?
-    let rank, y: Int?
-    let yr: String?
+struct D: Codable {
+    let images: I?
+    let movieid: String?
+    let movietitle: String?
+    let actors: String?
+    let feature: String?
+    let featureid: String?
+    let movierank: Int?
+    let movieyear: Int?
+    let year: String?
+    
+    enum CodingKeys: String, CodingKey{
+        case images = "i"
+        case movieid = "id"
+        case movietitle = "l"
+        case actors = "s"
+        case feature = "q"
+        case featureid = "qid"
+        case movierank = "rank"
+        case movieyear = "y"
+        case year = "yr"
+        
+    }
 }
 
 // MARK: - I

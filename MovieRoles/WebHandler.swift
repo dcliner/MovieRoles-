@@ -30,8 +30,8 @@ class WebHandler:ObservableObject {
             do{
                 let movieData = try JSONDecoder().decode(MovieDetails.self, from: moviedata)
                 DispatchQueue.main.async {
-                    self.movieList = movieData.d
-                }
+                    self.movieList = movieData.movies
+                } 
                 //print(String(data: movieData, encoding: .utf8)!)
             }catch{
                 print (error)
